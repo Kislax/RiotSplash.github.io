@@ -1,29 +1,35 @@
-<app>
-    <div class="container">
+<app class="container">
+
     <overhead
             title={ state.title }
             description={ state.description }
     />
-    <div id="pol"></div>
+
+    <gallery
+        logs={state.logs}
+    />
 
 
     <script defer src="dist/bundle.js"></script>
     <script>
 
         import Overhead from './components/overhead.riot';
+        import Gallery from './components/gallery.riot';
 
         export default {
             components: {
                 Overhead,
+                Gallery
             },
             state: {
                 title: "Заголовок",
                 description: "Мощный дрон с записью 4K видео, мощной батареей  " +
-                    "и продвинутым автопилотом."
+                    "и продвинутым автопилотом.",
+                logs: [{text:"1"},{text:"2"},{text:"3"},{text:"4"},{text:"5"},{text:"6"}]
             }
 
         }
 
     </script>
-    </div>
+
 </app>
