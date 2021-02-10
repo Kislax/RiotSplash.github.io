@@ -1,6 +1,23 @@
+@import './src/assets/fonts';
+
+body{
+  background: #E4E4E4;
+  font-family: Open Sans Condensed, fantasy;
+}
+
+h1{
+  font-family: Playfair Display, cursive;
+}
+
+
 .container {
   display: flex;
   justify-content: center;
-  align-items: center;
   min-height: 100vh;
+}
+.fail{
+  width: 100%;
+  height: 200px;
+  background: coral;
+  opacity: 30%;
 }

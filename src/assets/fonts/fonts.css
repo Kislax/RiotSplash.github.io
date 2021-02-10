@@ -1,0 +1,22 @@
+
+@font-face {
+    font-family: 'Playfair Display';
+    src: local('Playfair Display Bold'), local('PlayfairDisplay-Bold'),
+    url('Playfairdisplaybold.woff2') format('woff2'),
+    url('Playfairdisplaybold.woff') format('woff'),
+    url('Playfairdisplaybold.ttf') format('truetype'),
+    url('Playfairdisplaybold.svg#PlayfairDisplay-Bold') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans Condensed';
+    src: local('Open Sans Condensed'), local('PlayfairDisplay-Bold'),
+    url('OpenSansCondensed-Light.woff2') format('woff2'),
+    url('OpenSansCondensed-Light.woff') format('woff'),
+    url('OpenSansCondensed-Light.ttf') format('truetype'),
+    url('OpenSansCondensed-Light.svg#open_sanscondensed_light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}

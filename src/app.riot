@@ -1,7 +1,10 @@
 <app>
-
-        <overhead title = { state.title }  description = { state.description }></overhead>
-            <div id="pol"></div>
+    <div class="container">
+    <overhead
+            title={ state.title }
+            description={ state.description }
+    />
+    <div id="pol"></div>
 
 
     <script defer src="dist/bundle.js"></script>
@@ -9,18 +12,18 @@
 
         import Overhead from './components/overhead.riot';
 
-        export default{
-            components:{
+        export default {
+            components: {
                 Overhead,
             },
             state: {
-                title:"Заголовок",
-                description:"Мощный дрон с записью 4K видео, мощной батареей\n" +
+                title: "Заголовок",
+                description: "Мощный дрон с записью 4K видео, мощной батареей  " +
                     "и продвинутым автопилотом."
             }
 
         }
 
     </script>
-
+    </div>
 </app>
