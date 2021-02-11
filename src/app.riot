@@ -1,16 +1,14 @@
-<app class="container">
+<app>
 
     <overhead
             title={ state.title }
             description={ state.description }
     />
-    <button onclick={ generate }>КНОПКА</button>
+    <button onclick={ gen }>button</button>
     <gallery
             photoData={state.photoData}
     />
 
-
-    <script defer src="dist/bundle.js"></script>
     <script>
 
 
@@ -30,19 +28,40 @@
 
             },
 
-            generate(){
-                fetch('https://api.unsplash.com/photos/?client_id=AFDhwv8KgCPMlQv3LwMNtoGBh10JcgxBvEcZ-G3Jc8w').then(response => response.json())
-                    .then(data=>{
-                        this.update({
-                            photoData: data,
-                        })
-                    })
+            gen(){
+                if (localStorage.photoData){
+                    this.update({
+                        imageData: localStorage.getItem("photoData")
+                    });
+                }else {
+                    fetch('https://api.unsplash.com/photos/?client_id=AFDhwv8KgCPMlQv3LwMNtoGBh10JcgxBvEcZ-G3Jc8w').then(response => response.json())
+                        .then(data => {
+                            this.update({
+                                photoData: data,
 
-                console.log(this.state.photoData)
-            }
+                            })
+                        })
+                }
+            },
+            onUpdated(){
+                localStorage.setItem( "photoData", this.state.photoData );
+                console.log("storage", localStorage)
+                console.log("sdata", this.state.photoData)
+
+            },
 
         }
 
     </script>
+
+    <style>
+       :host {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+        }
+    </style>
 
 </app>

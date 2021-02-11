@@ -1,19 +1,29 @@
 <photo-card>
-    <img class="image" src=""{props.image.urls.small}>
+
+    <img class="image" src={ props.sourse } alt="picture" />
+
+
+
 
     <style>
         .image{
-            display: block;
-            width:100%;
+            display: flex;
+            width: 100%;
             height: 100%;
-            text-align: center;
-            font-size: 5vh;
+            flex: 0 0 auto;
+            border:2px magenta solid;
+            object-fit: contain;
+        }
+        :host{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: max-content;
+            width:100%;
+            border:5px solid darkblue;
+            flex: 1 0 100%;
+
         }
     </style>
 </photo-card>
 
-
-
-
-
-{{({({({()})})})}
