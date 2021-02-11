@@ -4,14 +4,15 @@
             title={ state.title }
             description={ state.description }
     />
-
+    <button onclick={ generate }>КНОПКА</button>
     <gallery
-        logs={state.logs}
+            photoData={state.photoData}
     />
 
 
     <script defer src="dist/bundle.js"></script>
     <script>
+
 
         import Overhead from './components/overhead.riot';
         import Gallery from './components/gallery.riot';
@@ -25,7 +26,19 @@
                 title: "Заголовок",
                 description: "Мощный дрон с записью 4K видео, мощной батареей  " +
                     "и продвинутым автопилотом.",
-                logs: [{text:"1"},{text:"2"},{text:"3"},{text:"4"},{text:"5"},{text:"6"}]
+                photoData: []
+
+            },
+
+            generate(){
+                fetch('https://api.unsplash.com/photos/?client_id=AFDhwv8KgCPMlQv3LwMNtoGBh10JcgxBvEcZ-G3Jc8w').then(response => response.json())
+                    .then(data=>{
+                        this.update({
+                            photoData: data,
+                        })
+                    })
+
+                console.log(this.state.photoData)
             }
 
         }
