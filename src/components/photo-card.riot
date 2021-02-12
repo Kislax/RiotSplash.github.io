@@ -2,7 +2,13 @@
 
     <img class="image" src={ props.sourse } alt="picture" />
 
+    <script>
+        export default {
+            onBeforeMount(){
 
+            }
+        }
+    </script>
 
 
     <style>
@@ -14,14 +20,19 @@
 
         }
         :host{
+            position: relative;
             display: flex;
             height: 100%;
-            width: 100%;
-            /*overflow: fragments;*/
-            flex: 1 0 auto;
-            margin-bottom: 30px;
+            max-width: 100%;
 
-            /*margin-right: 30px;*/
+            margin-bottom: 30px;
+            break-inside: avoid-column;
+            page-break-after: avoid;
+            overflow: hidden; /* fix for firefox */
+
+            -moz-column-fill: auto;
+            column-fill: auto;
+
         }
     </style>
 </photo-card>

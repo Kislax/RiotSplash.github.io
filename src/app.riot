@@ -4,7 +4,6 @@
             title={ state.title }
             description={ state.description }
     />
-    <button onclick={ gen }>button</button>
     <gallery
             photoData={state.photoData}
     />
@@ -28,7 +27,7 @@
 
             },
 
-            gen(){
+            onMounted(){
                 if (localStorage.photoData){
                     this.update({
                         imageData: localStorage.getItem("photoData")
