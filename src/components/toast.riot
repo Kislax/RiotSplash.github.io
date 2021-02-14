@@ -1,0 +1,40 @@
+<toast>
+    <p if = { props.visible }>
+        { props.message }
+    </p>
+
+    <script>
+            export default {
+                onMounted() {
+                    if (this.props.visible) {
+                        setInterval(this.update({
+                            toast: {
+                                visible: false
+                            }
+                        }),5000)
+
+                    }
+
+
+                }
+            }
+    </script>
+
+    <style>
+        :host{
+            position: absolute;
+            right: 15%;
+            top: 10%;
+            background: #1E2128;
+            z-index: 999;
+            width: 20%;
+            height: auto;
+            text-align: center;
+        }
+        p {
+            margin: 10px;
+            vertical-align: middle;
+            color: #E4E4E4;
+        }
+    </style>
+</toast>

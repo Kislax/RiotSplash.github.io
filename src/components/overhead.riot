@@ -1,28 +1,40 @@
 <overhead>
 
     <h1>{props.title}</h1>
-    <p>{props.description}</p>
+    <p>{props.description.OneStr}<br>{props.description.TwoStr}</p>
 
     <style>
         :host{
             padding-top: 100px;
+            padding-bottom: 50px;
+            position: fixed;
+            z-index: 100;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #E4E4E4;
+
+            display: flex;
+            flex-direction: column;
+
         }
         h1{
             font-family: Playfair Display Bold;
             font-size:60px;
             line-height:68px;
             text-align: center;
+            display: block;
 
         }
         p{
-            width: 550px;
+
             font-family: Open Sans Condensed, fantasy;
             font-weight: 300;
             font-size: 20px;
             line-height: 30px;
-            align-items: center;
             text-align: center;
             letter-spacing: 0.0185714em;
+
         }
     </style>
 </overhead>
