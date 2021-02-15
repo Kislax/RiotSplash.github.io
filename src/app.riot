@@ -28,17 +28,7 @@
 
 
 
-        window.addEventListener('scroll', event => {
-            let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom, // нижняя граница документа
-                windowHeight = document.documentElement.clientHeight,
-                gallery=document.querySelector("#gallery"),
-                galleryHeight=gallery.clientHeight
 
-            if (windowRelativeBottom < windowHeight + 300) {            // если пользователь прокрутил достаточно далеко (< 100px до конца)
-                // добавим больше данных
-                this.UpdaterPhoto()
-            }
-        });
 
 
 
@@ -58,10 +48,11 @@
                 },
                 photoData: [],
                 loader: false,
-                toast:{
-                    message:"",
+                toast: {
+                    message: "",
                     visible: false
-                }
+                },
+
             },
             onMounted(){
                 //
@@ -74,12 +65,12 @@
                     this.update({
                         loader: true,
                     })
-                    fetch('https://api.unsplash.com/photos/?client_id=7ZhdkhVgOacZc6_ibFDJPBbKpmBRJXH8BkR7KOc19So')
+                    fetch('https://api.unsplash.com/photos/?client_id=AFDhwv8KgCPMlQv3LwMNtoGBh10JcgxBvEcZ-G3Jc8w')
                         .then(response => response.json())
                         .then(data => {
                             this.update({
-                                photoData:   data,
-                                loader:false
+                                photoData: data,
+                                loader:false,
                             })
                         })
                 }
@@ -88,17 +79,32 @@
             onUpdated(){
                 localStorage.setItem( "photoData", JSON.stringify( this.state.photoData ));
 
+                window.addEventListener('scroll', event => {
+                    let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom, // нижняя граница документа
+                        windowHeight = document.documentElement.clientHeight,   //Нижняя граница видимой страницы
+                        gallery = document.querySelector("#gallery"),
+                        galleryHeight = gallery.clientHeight,
+                        galleryOffsetTop = gallery.offsetTop
+                    console.log(windowRelativeBottom, windowHeight, galleryHeight + galleryOffsetTop );
+
+                    if (( windowRelativeBottom < windowHeight + 200 ) && !this.state.loader) {            // проверка позиции скоролинга + проверка на Грузится ли сейчас что то.
+                        // добавим больше данных
+                        console.log("ТУЦ ТУЦ");
+                        this.UpdaterPhoto();
+                    }
+                });
             },
             UpdaterPhoto(){
                 this.update({
                     loader: true,
+
                 })
-                fetch('https://api.unsplash.com/photos/?client_id=7ZhdkhVgOacZc6_ibFDJPBbKpmBRJXH8BkR7KOc19So')
+                fetch('https://api.unsplash.com/photos/?client_id=AFDhwv8KgCPMlQv3LwMNtoGBh10JcgxBvEcZ-G3Jc8w')
                     .then(response => response.json())
                     .then(data => {
                         this.update({
-                            photoData:   data,
-                            loader:false
+                            photoData: [...this.state.photoData, data],
+                            loader:false,
                         })
                     })
             }
