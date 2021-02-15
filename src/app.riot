@@ -1,6 +1,6 @@
 <app >
     <toast
-            visible={ state.toast.visible }
+            visible={ state.toast.message }
             message={ state.toast.message }
     />
 
@@ -9,16 +9,17 @@
             description={ state.description }
     />
 
-    <loader
-            visible={ state.loader }
 
-    />
 
     <gallery
+
             id="gallery"
             photoData={ state.photoData }
     />
+    <loader
+            loader={ state.loader }
 
+    />
 
     <script>
         import Overhead from './components/overhead.riot';
@@ -58,21 +59,15 @@
                 //
                 // document.getElementById("gallery").lastChild
                 if (localStorage.photoData){
+                    console.log('старые данные')
                     this.update({
                         photoData: JSON.parse(localStorage.getItem("photoData"))
-                    });
-                }else {
-                    this.update({
-                        loader: true,
                     })
-                    fetch('https://api.unsplash.com/photos/?client_id=AFDhwv8KgCPMlQv3LwMNtoGBh10JcgxBvEcZ-G3Jc8w')
-                        .then(response => response.json())
-                        .then(data => {
-                            this.update({
-                                photoData: data,
-                                loader:false,
-                            })
-                        })
+
+                }else {
+
+                    this.UpdaterPhoto()
+                    console.log('обнова')
                 }
 
             },
@@ -81,32 +76,41 @@
 
                 window.addEventListener('scroll', event => {
                     let windowRelativeBottom = document.documentElement.getBoundingClientRect().bottom, // нижняя граница документа
-                        windowHeight = document.documentElement.clientHeight,   //Нижняя граница видимой страницы
-                        gallery = document.querySelector("#gallery"),
-                        galleryHeight = gallery.clientHeight,
-                        galleryOffsetTop = gallery.offsetTop
-                    console.log(windowRelativeBottom, windowHeight, galleryHeight + galleryOffsetTop );
+                        windowHeight = document.documentElement.clientHeight;
 
-                    if (( windowRelativeBottom < windowHeight + 200 ) && !this.state.loader) {            // проверка позиции скоролинга + проверка на Грузится ли сейчас что то.
+                        console.log(windowHeight, windowRelativeBottom)
+                    if ((windowRelativeBottom   < windowHeight + 100 ) && !this.state.loader) {            // проверка позиции скоролинга
                         // добавим больше данных
-                        console.log("ТУЦ ТУЦ");
                         this.UpdaterPhoto();
                     }
-                });
+                },
+                    { passive: true });
             },
             UpdaterPhoto(){
                 this.update({
                     loader: true,
-
                 })
-                fetch('https://api.unsplash.com/photos/?client_id=AFDhwv8KgCPMlQv3LwMNtoGBh10JcgxBvEcZ-G3Jc8w')
+                fetch('https://api.unsplash.com/photos/?client_id=7ZhdkhVgOacZc6_ibFDJPBbKpmBRJXH8BkR7KOc19So')
                     .then(response => response.json())
                     .then(data => {
-                        this.update({
-                            photoData: [...this.state.photoData, data],
-                            loader:false,
-                        })
+                            this.update({
+                                photoData: [...this.state.photoData, data],
+                                loader: false,
+                            })
+
                     })
+                .catch(e=>{
+                    this.update({
+                        toast:{
+                            message: e.message,
+                            visible: true
+                        },
+                    })
+                })
+
+            },
+            onUnmounted(){
+                localStorage.clear()
             }
 
 

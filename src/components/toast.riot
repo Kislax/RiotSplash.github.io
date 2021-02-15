@@ -5,12 +5,14 @@
 
     <script>
             export default {
-                onMounted() {
+                onUpdated() {
                     if (this.props.visible) {
-                        setInterval(this.update({
-                            toast: {
-                                visible: false
-                            }
+                        setInterval(
+                            this.update({
+                                toast: {
+                                    visible: false,
+                                    message: ""
+                                }
                         }),5000)
 
                     }
@@ -22,7 +24,7 @@
 
     <style>
         :host{
-            position: absolute;
+            position: fixed;
             right: 15%;
             top: 10%;
             background: #1E2128;
