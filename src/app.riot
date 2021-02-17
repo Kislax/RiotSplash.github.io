@@ -66,7 +66,7 @@
 
                 }else {
 
-                    this.UpdaterPhoto()
+                    this.updaterPhoto()
                     console.log('обнова')
                 }
 
@@ -79,36 +79,30 @@
                         windowHeight = document.documentElement.clientHeight;
 
                         console.log(windowHeight, windowRelativeBottom)
-                    if ((windowRelativeBottom   < windowHeight + 100 ) && !this.state.loader) {            // проверка позиции скоролинга
+                    if ((windowRelativeBottom   < windowHeight + 50 ) && !this.state.loader) {            // проверка позиции скоролинга
                         // добавим больше данных
-                        this.UpdaterPhoto();
+                        console.log('Добавление')
+                        this.updaterPhoto();
                     }
                 },
                     { passive: true });
             },
-            UpdaterPhoto(){
+            updaterPhoto(){
                 this.update({
                     loader: true,
                 })
                 fetch('https://api.unsplash.com/photos/?client_id=7ZhdkhVgOacZc6_ibFDJPBbKpmBRJXH8BkR7KOc19So')
                     .then(response => response.json())
                     .then(data => {
-                            this.update({
-                                photoData: [...this.state.photoData, data],
-                                loader: false,
-                            })
+                        this.update({
+                            photoData: this.state.photoData.concat(data),
+                            loader: false,
+                        })
+
 
                     })
-                .catch(e=>{
-                    this.update({
-                        toast:{
-                            message: e.message,
-                            visible: true
-                        },
-                    })
-                })
-
             },
+
             onUnmounted(){
                 localStorage.clear()
             }

@@ -3,7 +3,8 @@
             class="photoHolder"
             height = { props.height}
             width = { props.width }
-            color={  props.color }>
+            color={  props.color }
+    >
     <img
             class="image"
             src={ props.sourse }
@@ -14,11 +15,11 @@
     <script>
         export default {
             onMounted(){
-                document.querySelector(".photoHolder").style.background= this.props.color + " " ;
-                document.querySelector(".image")
+                document.querySelector(".photoHolder").style.background = this.props.color ;
 
             },
             PhotoLoaded(e){
+                console.log("update")
                 e.target.style.display="flex";
             }
         }
@@ -51,8 +52,8 @@
             page-break-after: avoid;
             overflow: hidden;        /* fix for firefox */
 
-            -moz-column-fill: balance;
-            column-fill: balance;
+            -moz-column-fill: auto;
+            column-fill: auto;
 
         }
     </style>
