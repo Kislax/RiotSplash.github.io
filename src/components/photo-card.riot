@@ -1,59 +1,102 @@
 <photo-card>
     <div
             class="photoHolder"
-            height = { props.height}
-            width = { props.width }
+            height={ props.height}
+            width={ props.width }
             color={  props.color }
     >
-    <img
-            class="image"
-            src={ props.sourse }
-            onload={ e=>PhotoLoaded(e) }
-            alt={ props.alt }
-    />
+        <figure>
+            <div class="photoBack">
+
+                <div class="imageBox">
+                <img
+                        class="image"
+                        src={ props.sourse }
+                        onload={ e=>PhotoLoaded(e) }
+                        alt={ props.alt }
+                />
+                    <div class="imageSoccer"></div>
+                </div>
+
+            </div>
+        </figure>
     </div>
+
+
+
+
     <script>
         export default {
-            onMounted(){
-                document.querySelector(".photoHolder").style.background = this.props.color ;
+            onMounted() {
+                document.querySelector(".photoHolder").style.background = this.props.color;
 
             },
-            PhotoLoaded(e){
+            PhotoLoaded(e) {
                 console.log("update")
-                e.target.style.display="flex";
+                e.target.style.display = "block";
             }
         }
-
-
     </script>
 
 
     <style>
-        div{
-            width: 100%;
-            transition: 300ms;
+        .imageSoccer{
+            padding-bottom: 150%;
         }
-        .image{
-            display: none;
-            width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            transition: 300ms;
-
-
-        }
-        :host{
+        .imageBox{
             position: relative;
-            display: flex;
+            width: 100%;
             height: 100%;
-            max-width: 100%;
-            margin-bottom: 30px;
-            break-inside: avoid-column;
-            page-break-after: avoid;
-            overflow: hidden;        /* fix for firefox */
+        }
+        .photoBack{
+            /*position: relative;*/
+            /*width: 100%;*/
+            /*height: 100%;*/
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        .photoHolder{
+            padding-bottom: 30px;
 
-            -moz-column-fill: auto;
-            column-fill: auto;
+
+        }
+        figure {
+            margin: 0;
+            /*margin-block-start: 1em;*/
+            /*margin-block-end: 1em;*/
+            /*margin-inline-start: 40px;*/
+            /*margin-inline-end: 40px;*/
+
+        }
+
+        div {
+            /*width: 100%;*/
+            /*height: 100%;*/
+            /*display: block;*/
+
+        }
+
+        .image {
+            display: none;
+
+            /*border-style: none;*/
+            /*object-fit: contain;*/
+            /*transition: 300ms;*/
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+
+
+        }
+
+        :host {
+            /*position: relative;*/
+            /*height: 100%;*/
+            /*width: 100%;*/
+
 
         }
     </style>
